@@ -1,0 +1,26 @@
+{
+  "name": "converterpoc",
+  "version": "1.0.0",
+  "description": "This project demonstrate the usage of c executable for linux to convert font file to another font file",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js ",
+    "start convertToTTF": "node src/index.js convertToTTF",
+    "start convertToOTF": "node src/index.js converterToOTF",
+    "start convertToEOT": "node src/index.js convertToEOT",
+    "start convertToWOFF": "node src/index.js converterToWOFF",
+    "start convertToMultipleFormats": "node src/index.js convertToMultipleFormats",
+    "start subsetToTTF": "node src/index.js subsetToTTF",
+    "start subsetToOTF": "node src/index.js subsetToOTF",
+    "start subsetToEOT": "node src/index.js subsetToEOT",
+    "start subsetToWOFF": "node src/index.js subsetToWOFF",
+    "start subsetToMultipleFormats": "node src/index.js subsetToMultipleFormats"
+  },
+  "author": "Jyoti Raj",
+  "license": "ISC",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "shelljs": "^0.8.2"
+  }
+}

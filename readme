@@ -1,0 +1,20 @@
+1. This is a POC project.
+
+2. Runs on mac and linux machine
+
+3. Put input file(like ttf , otf etc) in input folder at root of the project
+
+4. Run any of the following commands as per the requirement and get the output in output folder at the root of the project
+
+    npm start convert TTF
+    npm start convert OTF
+    npm start convert EOT
+    npm start convert WOFF
+    npm start convert MultipleFormats
+    npm start subset TTF
+    npm start subset OTF
+    npm start subset EOT
+    npm start subset WOFF
+    npm start subset MultipleFormats
+
+
