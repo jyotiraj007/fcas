@@ -15,7 +15,9 @@
     "start subsetToOTF": "node src/index.js subsetToOTF",
     "start subsetToEOT": "node src/index.js subsetToEOT",
     "start subsetToWOFF": "node src/index.js subsetToWOFF",
-    "start subsetToMultipleFormats": "node src/index.js subsetToMultipleFormats"
+    "start subsetToMultipleFormats": "node src/index.js subsetToMultipleFormats",
+    "preinstall": "chmod +x scripts/preinstall.sh && ./scripts/preinstall.sh"
+
   },
   "author": "Jyoti Raj",
   "license": "ISC",
