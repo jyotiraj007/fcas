@@ -7,44 +7,65 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
-if git rev-parse --verify HEAD >/dev/null 2>&1
-then
-	against=HEAD
-else
-	# Initial commit: diff against an empty tree object
-	against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
-fi
+#set -e # This returns if any of the commands in the script return error code
+#  precommitactions=`node -p "require('./package.json').preCommitActions"`
+#  arrIN=(${precommitactions//,/ })
 
-# If you want to allow non-ASCII filenames set this variable to true.
-allownonascii=$(git config --bool hooks.allownonascii)
+#  echo "precommitactions $precommitactions"
+ 
+#  for i in "${arrIN[@]}"
+#  do
+   
+#    echo "Running $i"
+#    npm run $i
+#    test_ec=$test_ec+$?
+#    # or do whatever with individual element of the array
+#  done
+# #  npm run test
+# #  test_ec=$?
+# #  echo "test_ec $test_ec"
+# #  npm run coverage
+# #  coverage_ec=$?
+# #  echo "coverage_ec $coverage_ec"
 
-# Redirect output to stderr.
-exec 1>&2
+# #  npm run nsp
+# #  nsp_ec=$?
+# #  echo "nsp_ec $nsp_ec"
 
-# Cross platform projects tend to avoid non-ASCII filenames; prevent
-# them from being added to the repository. We exploit the fact that the
-# printable range starts at the space character and ends with tilde.
-if [ "$allownonascii" != "true" ] &&
-	# Note that the use of brackets around a tr range is ok here, (it's
-	# even required, for portability to Solaris 10's /usr/bin/tr), since
-	# the square bracket bytes happen to fall in the designated range.
-	test $(git diff --cached --name-only --diff-filter=A -z $against |
-	  LC_ALL=C tr -d '[ -~]\0' | wc -c) != 0
-then
-	cat <<\EOF
-Error: Attempt to add a non-ASCII file name.
+#  #let "ERR= $test_ec+$coverage_ec+$nsp_ec"
+#  let "ERR= $test_ec"
 
-This can cause problems if you want to work with people on other platforms.
+#  echo "ERR $ERR"
 
-To be portable it is advisable to rename the file.
+# #testLog=$(npm run coverage)
+# echo $testLog
 
-If you know what you are doing you can disable this check using:
+# if [ "${ERR}" -ne 0 ]; then
+#  echo "Coverage must be 100%!"
+#  exit 1   # return 0 if want to commit else return non zero status
+# fi
+# # if [[ $testLog == *"errno 1"* ]]; then
+# #   echo "Coverage not complete"
+# #   exit -1 else
+# #   exit 1
+# # fi
 
-  git config hooks.allownonascii true
-EOF
-	exit 1
-fi
+preCommitOperations=`node -p "require('./package.json').preCommitActions"`
+preCommitOperationsArray=(${preCommitOperations//,/ })
+echo "preCommitOperationsArray ${preCommitOperationsArray[0]}"
+echo "preCommitOperations $preCommitOperations"
 
-# If there are whitespace errors, print the offending file names and fail.
-exec git diff-index --check --cached $against --
-
+for i in "${preCommitOperationsArray[@]}"
+do
+    echo "\033[33m Running $i \033[0m"
+    # echo "Running $i"
+    npm run $i
+	commandStatusCode=$?
+    echo "npm run $i status is $commandStatusCode"
+	echo "if condition " [ $commandStatusCode -ne 0 ]
+    if [ $commandStatusCode -ne 0 ]; then
+		echo "\033[31m pre-commit result: $i failed \033[0m"
+        exit 1   # exiting with non zero status prevents git to commit the changes
+    fi
+    
+done

@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js ",
+    "nsp": "nsp check",
     "start convertToTTF": "node src/index.js convertToTTF",
     "start convertToOTF": "node src/index.js converterToOTF",
     "start convertToEOT": "node src/index.js convertToEOT",
@@ -17,12 +18,13 @@
     "start subsetToWOFF": "node src/index.js subsetToWOFF",
     "start subsetToMultipleFormats": "node src/index.js subsetToMultipleFormats",
     "preinstall": "chmod +x scripts/preinstall.sh && ./scripts/preinstall.sh"
-
   },
   "author": "Jyoti Raj",
   "license": "ISC",
   "dependencies": {
     "child_process": "^1.0.2",
+    "nsp": "^3.2.1",
     "shelljs": "^0.8.2"
-  }
+  },
+  "preCommitActions": "lint,coverage,nsp"
 }
